@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "customers-panel": {
+      "hosting": {
+        "customers-panel": [
+          "customers-panel"
+        ]
+      }
+    }
+  }
+}
