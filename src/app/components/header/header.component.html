@@ -1,1 +1,29 @@
-<p>header works!</p>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark p-2">
+    <div class="container">
+        <a class="navbar-brand" routerlink="/">Control Clientes</a>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ml-auto px-3">
+                <li class="nav-item">
+                    <a routerLink="/" class="nav-link">Inicio</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user"></i> Bienvenido
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu">
+                        <a class="dropdown-item" routerLink="/configuration">
+                            <i class="fas fa-cog"></i> Configuración
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<button class="navbar-toggler d-md-none navbar-dark bg-dark fixed-br m-3" type="button" data-toggle="collapse"
+    data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
