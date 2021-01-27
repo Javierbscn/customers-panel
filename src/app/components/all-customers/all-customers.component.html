@@ -1,1 +1,41 @@
-<p>all-customers works!</p>
+<section id="actions" class="py-3 mb-3 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addCustomerModal">
+                    <i class="fas fa-plus"></i> Agregar Cliente
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="customers">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Listado de Clientes</h4>
+                    </div>
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Saldo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let customer of customers; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ customer.name }} {{ customer.lastname }}</td>
+                                <td>{{ customer.balance | currency: 'USD': '$' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
