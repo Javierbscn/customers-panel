@@ -13,29 +13,110 @@
 <section id="customers">
     <div class="container">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-6">
+                <div class="card text-center bg-success text-white mb-3">
+                    <div class="card-body">
+                        <h3>Saldo Total</h3>
+                        <h4 class="display-4">{{ getTotalBalance() | currency: 'USD': '$' }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card text-center bg-info text-white mb-3">
+                    <div class="card-body">
+                        <h3>Número de Clientes</h3>
+                        <h4 class="display-4">
+                            <i class="fas fa-users"></i> {{ customers?.length }}
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
                 <div class="card">
                     <div class="card-header">
                         <h4>Listado de Clientes</h4>
                     </div>
-                    <table class="table table-striped">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>#</th>
-                                <th>Nombre</th>
-                                <th>Saldo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let customer of customers; let i = index">
-                                <td>{{ i + 1 }}</td>
-                                <td>{{ customer.name }} {{ customer.lastname }}</td>
-                                <td>{{ customer.balance | currency: 'USD': '$' }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive-sm">
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nombre</th>
+                                    <th>Saldo</th>
+                                    <th>Email</th>
+                                    <th>Detalles</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let customer of customers; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ customer.name }} {{ customer.lastname }}</td>
+                                    <td>{{ customer.balance | currency: 'USD': '$' }}</td>
+                                    <td>{{ customer.email }}</td>
+                                    <td>
+                                        <a routerLink="/customer/edit/{{ customer.id }}" class="btn btn-secondary">
+                                            <i class="far fa-edit"></i> Editar
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="addCustomerModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title">Agregar Cliente</h5>
+                <button class="close" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+
+            <flash-messages></flash-messages>
+
+            <form  #customerForm="ngForm" (ngSubmit)="addCustomer(customerForm)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input 
+                            type="text" 
+                            name="name"
+                            class="form-control"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Apellido</label>
+                        <input 
+                            type="text" 
+                            name="lastname"
+                            class="form-control"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input 
+                            type="email" 
+                            name="email"
+                            class="form-control"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="balance">Saldo</label>
+                        <input 
+                            type="number" 
+                            name="balance"
+                            class="form-control"
+                        >
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
