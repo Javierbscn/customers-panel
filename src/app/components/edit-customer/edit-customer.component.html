@@ -1,1 +1,111 @@
-<p>edit-customer works!</p>
+<header id="main-header" class="py-3 bg-info text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1><i class="fas fa-user"></i> Editar Cliente</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<form  #customerForm="ngForm" (ngSubmit)="saveCustomer(customerForm)">
+
+    <flash-messages></flash-messages>
+
+    <section id="actions" class="py-3 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <a routerLink="/" class="btn btn-secondary btn-block">
+                        <i class="fas fa-arrow-left"></i> Volver al Inicio
+                    </a>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-check"></i> Guardar Cliente
+                    </button>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <a href="#" class="btn btn-danger btn-block" (click)="deleteCustomer()">
+                        <i class="fas fa-trash"></i> Eliminar Cliente
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="details">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Editar Cliente</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="name">Nombre</label>
+                                <input 
+                                    type="text" 
+                                    name="name"
+                                    class="form-control" 
+                                    #name="ngModel"
+                                    [(ngModel)]="customer.name"
+                                    [ngClass]="{'is-invalid': name.errors && name.touched}"
+                                    required
+                                    minlength="2"
+                                >
+                                <div [hidden]="!name.errors?.required" class="invalid-feedback">Nombre requerido</div>
+                                <div [hidden]="!name.errors?.minlength" class="invalid-feedback">Debe contener al menos 2 caracteres</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname">Apellido</label>
+                                <input 
+                                    type="text" 
+                                    name="lastname"
+                                    class="form-control" 
+                                    #lastname="ngModel"
+                                    [(ngModel)]="customer.lastname"
+                                    [ngClass]="{'is-invalid': lastname.errors && lastname.touched}"
+                                    required
+                                    minlength="2"
+                                >
+                                <div [hidden]="!lastname.errors?.required" class="invalid-feedback">Apellido requerido</div>
+                                <div [hidden]="!lastname.errors?.minlength" class="invalid-feedback">Debe contener al menos 2 caracteres</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input 
+                                    type="email" 
+                                    name="email"
+                                    class="form-control"
+                                    #email="ngModel"
+                                    [(ngModel)]="customer.email"
+                                    [ngClass]="{'is-invalid': email.errors && email.touched}"
+                                    required
+                                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                                >
+                                <div [hidden]="!email.errors?.required" class="invalid-feedback">Email requerido</div>
+                                <div [hidden]="!email.errors?.pattern" class="invalid-feedback">Email no válido</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="balance">Saldo</label>
+                                <input 
+                                    type="number" 
+                                    name="balance"
+                                    class="form-control" 
+                                    #balance="ngModel"
+                                    [(ngModel)]="customer.balance"
+                                    [ngClass]="{'is-invalid': balance.errors && balance.touched}"
+                                    required
+                                >
+                                <div [hidden]="!balance.errors?.required" class="invalid-feedback">Saldo requerido</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>

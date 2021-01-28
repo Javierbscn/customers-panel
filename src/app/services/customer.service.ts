@@ -23,20 +23,47 @@ export class CustomerService {
         );
     }
 
+    addCustomer(customer: Customer): void {
+        this.customerCollection.add(customer);
+    }
+
+    deleteCustomer(customer: Customer): void {
+        this.customerDoc = this.db.doc<Customer>(`customers/${customer.id}`);
+
+        this.customerDoc.delete();
+    }
+
+    editCustomer(customer: Customer): void {
+        this.customerDoc = this.db.doc<Customer>(`customers/${customer.id}`);
+
+        this.customerDoc.update(customer);
+    }
+
+    getCustomer(id: string): Observable<Customer> {
+        this.customerDoc = this.db.doc<Customer>(`customers/${id}`);
+        this.customer = this.customerDoc.snapshotChanges().pipe(
+            map(action => {
+                if (action.payload.exists === false) return null;
+                else {
+                    const data = action.payload.data() as Customer;
+                    data.id = action.payload.id;
+                    return data;
+                }
+            })
+        )
+        return this.customer;
+    }
+
     getCustomers(): Observable<Customer[]> {
         this.customers = this.customerCollection.snapshotChanges().pipe(
             map((actions) => {
-                return actions.map((a) => {
-                    const data = a.payload.doc.data() as Customer;
-                    data.id = a.payload.doc.id;
+                return actions.map((action) => {
+                    const data = action.payload.doc.data() as Customer;
+                    data.id = action.payload.doc.id;
                     return data;
                 });
             })
         );
         return this.customers;
-    }
-
-    addCustomer(customer: Customer): void {
-        this.customerCollection.add(customer);
     }
 }
