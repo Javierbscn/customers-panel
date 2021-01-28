@@ -35,4 +35,8 @@ export class CustomerService {
         );
         return this.customers;
     }
+
+    addCustomer(customer: Customer): void {
+        this.customerCollection.add(customer);
+    }
 }
