@@ -4,21 +4,25 @@
 
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav ml-auto px-3">
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="isLoggedIn">
                     <a routerLink="/" class="nav-link">Inicio</a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" *ngIf="isLoggedIn">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user"></i> Bienvenido
+                        <i class="fas fa-user"></i> Bienvenido {{ loggedInUser }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenu">
                         <a class="dropdown-item" routerLink="/configuration">
                             <i class="fas fa-cog"></i> Configuración
                         </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item btn" (click)="logout()">
+                            <i class="fas fa-user-times"></i> Cerrar sesión
+                        </a>
                     </div>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="!isLoggedIn">
                     <a routerLink="/login" class="nav-link">
                         <i class="fas fa-user"></i> Iniciar sesión
                     </a>

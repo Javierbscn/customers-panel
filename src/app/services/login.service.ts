@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
 })
 export class LoginService {
     constructor(private authService: AngularFireAuth) {}
+
+    getAuth(): Observable<any> {
+        return this.authService.authState.pipe(map((auth) => auth));
+    }
 
     login(email: string, password: string): Promise<any> {
         return new Promise((resolve, reject) => {
@@ -14,5 +20,9 @@ export class LoginService {
                 (error) => reject(error)
             );
         });
+    }
+
+    logout(): void {
+        this.authService.signOut();
     }
 }
