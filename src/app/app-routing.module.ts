@@ -6,18 +6,19 @@ import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PanelComponent } from './components/panel/panel.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: PanelComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'configuration', component: ConfigurationComponent },
-  { path: 'customer/edit/:id', component: EditCustomerComponent },
-  { path: '**', component: NotFoundComponent },
+    { path: '', component: PanelComponent, canActivate: [AuthGuard] },
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
+    { path: 'configuration', component: ConfigurationComponent, canActivate: [AuthGuard] },
+    { path: 'customer/edit/:id', component: EditCustomerComponent, canActivate: [AuthGuard] },
+    { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

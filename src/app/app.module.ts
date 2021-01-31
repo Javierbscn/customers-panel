@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AngularFireModule } from "@angular/fire";
-import { AngularFirestoreModule, Settings } from "@angular/fire/firestore";
-import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { FlashMessagesModule } from 'flash-messages-angular';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 
-import { environment } from "../environments/environment";
+import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,33 +21,31 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CustomerService } from './services/customer.service';
 import { LoginService } from './services/login.service';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    PanelComponent,
-    AllCustomersComponent,
-    EditCustomerComponent,
-    LoginComponent,
-    RegisterComponent,
-    ConfigurationComponent,
-    NotFoundComponent,
-    FooterComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firestore, 'customers-panel'),
-    AngularFirestoreModule,
-    AngularFireAuthModule,
-    FormsModule,
-    FlashMessagesModule.forRoot()
-  ],
-  providers: [
-    CustomerService,
-    LoginService
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        PanelComponent,
+        AllCustomersComponent,
+        EditCustomerComponent,
+        LoginComponent,
+        RegisterComponent,
+        ConfigurationComponent,
+        NotFoundComponent,
+        FooterComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        AngularFireModule.initializeApp(environment.firestore, 'customers-panel'),
+        AngularFirestoreModule,
+        AngularFireAuthModule,
+        FormsModule,
+        FlashMessagesModule.forRoot(),
+    ],
+    providers: [AuthGuard, CustomerService, LoginService],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
