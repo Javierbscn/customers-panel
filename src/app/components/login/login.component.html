@@ -10,10 +10,6 @@
 
 <div class="container">
     <div class="row">
-        <section class="py-3 mb-3 bg-light">
-
-        </section>
-
         <div class="col-12">
             <flash-messages></flash-messages>
         </div>
@@ -34,8 +30,11 @@
                                 <label for="password">Contraseña</label>
                                 <input type="password" name="password" class="form-control" [(ngModel)]="password" required>
                             </div>
+                            <p>
+                                ¿No tienes una cuenta aún? <a routerLink="/register">Regístrate aquí</a>.
+                            </p>
                             <div class="form-group">
-                                <input type="submit" value="login" class="btn btn-primary btn-block">
+                                <input type="submit" value="Iniciar sesión" class="btn btn-primary btn-block">
                             </div>
                         </form>
                     </div>
