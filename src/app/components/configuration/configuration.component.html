@@ -1,1 +1,46 @@
-<p>configuration works!</p>
+<header id="main-header" class="py-3 bg-info text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1><i class="fas fa-cog"></i> Configuración</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <a routerLink="/" class="btn btn-secondary btn-block">
+                <i class="fas fa-arrow-left"></i> Regresar al inicio
+            </a>
+        </div>
+        <div class="col-md-4 mb-3">
+            <button class="btn btn-success btn-block" (click)="save()">
+                <i class="fas fa-check"></i> Guardar cambios
+            </button>
+        </div>
+
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Editar configuración</h4>
+                </div>
+                <div class="card-body">
+                    <fieldset class="form-group">
+                        <legend>Permitir registro de usuarios</legend>
+                        <label class="form-check">
+                            <input
+                                type="checkbox"
+                                name="allowRegister"
+                                class="form-check-input"
+                                [(ngModel)]="allowRegister"
+                                [checked]="allowRegister"
+                            > {{ allowRegister ? 'Si' : 'No' }}
+                        </label>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
