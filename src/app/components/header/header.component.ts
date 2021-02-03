@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ConfigurationService } from 'src/app/services/configuration.service';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -10,8 +11,13 @@ import { LoginService } from 'src/app/services/login.service';
 export class HeaderComponent implements OnInit {
     isLoggedIn: boolean;
     loggedInUser: string;
+    showRegister: boolean;
 
-    constructor(private _router: Router, private loginService: LoginService) {}
+    constructor(
+        private _router: Router,
+        private loginService: LoginService,
+        private configurationService: ConfigurationService
+    ) {}
 
     ngOnInit(): void {
         this.loginService.getAuth().subscribe((auth) => {
@@ -22,11 +28,17 @@ export class HeaderComponent implements OnInit {
                 this.isLoggedIn = false;
             }
         });
+
+        this.configurationService
+            .getConfiguration()
+            .subscribe((configuration) => {
+                this.showRegister = configuration.allowRegister;
+            });
     }
 
     logout() {
         this.loginService.logout();
         this.isLoggedIn = false;
-        this._router.navigate(['/login'])
+        this._router.navigate(['/login']);
     }
 }

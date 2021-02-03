@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'flash-messages-angular';
+import { ConfigurationService } from 'src/app/services/configuration.service';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -11,22 +12,36 @@ import { LoginService } from 'src/app/services/login.service';
 export class LoginComponent implements OnInit {
     email: string;
     password: string;
+    showRegister: boolean;
 
     constructor(
+        private _router: Router,
         private flashMessages: FlashMessagesService,
         private loginService: LoginService,
-        private _router: Router
+        private configurationService: ConfigurationService
     ) {}
 
     ngOnInit(): void {
-        this.loginService.getAuth().subscribe(auth => {
+        this.loginService.getAuth().subscribe((auth) => {
             if (auth) {
                 this._router.navigate(['/']);
             }
-        })
+        });
+
+        this.configurationService
+            .getConfiguration()
+            .subscribe((configuration) => {
+                this.showRegister = configuration.allowRegister;
+            });
     }
 
-    login(): void {
+    disableBtn(input: HTMLInputElement): void {
+        input.toggleAttribute('disabled')
+    }
+
+    login(input: HTMLInputElement): void {
+        this.disableBtn(input);
+
         this.loginService
             .login(this.email, this.password)
             .then((response) => {

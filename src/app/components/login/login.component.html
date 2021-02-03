@@ -14,14 +14,14 @@
             <flash-messages></flash-messages>
         </div>
 
-        <section class="col-12 mt-3">
+        <section class="col-12 my-3">
             <div class="col-md-6 mx-auto">
                 <div class="card">
                     <div class="card-header">
                         <h4>Inicia sesión</h4>
                     </div>
                     <div class="card-body">
-                        <form (submit)="login()">
+                        <form (submit)="login(inputSubmit)">
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input type="email" name="email" class="form-control" [(ngModel)]="email" required>
@@ -30,11 +30,11 @@
                                 <label for="password">Contraseña</label>
                                 <input type="password" name="password" class="form-control" [(ngModel)]="password" required>
                             </div>
-                            <p>
+                            <p *ngIf="showRegister">
                                 ¿No tienes una cuenta aún? <a routerLink="/register">Regístrate aquí</a>.
                             </p>
                             <div class="form-group">
-                                <input type="submit" value="Iniciar sesión" class="btn btn-primary btn-block">
+                                <input type="submit" value="Iniciar sesión" class="btn btn-primary btn-block" #inputSubmit>
                             </div>
                         </form>
                     </div>

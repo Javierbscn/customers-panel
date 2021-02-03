@@ -27,7 +27,7 @@
                         <i class="fas fa-user"></i> Iniciar sesión
                     </a>
                 </li>
-                <li class="nav-item" *ngIf="!isLoggedIn">
+                <li class="nav-item" *ngIf="!isLoggedIn && showRegister">
                     <a routerLink="/register" routerLinkActive="active" class="nav-link">
                         <i class="fas fa-user"></i> Registrarse
                     </a>
