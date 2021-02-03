@@ -7,13 +7,26 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PanelComponent } from './components/panel/panel.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ConfigurationGuard } from './guards/configuration.guard';
 
 const routes: Routes = [
     { path: '', component: PanelComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'configuration', component: ConfigurationComponent, canActivate: [AuthGuard] },
-    { path: 'customer/edit/:id', component: EditCustomerComponent, canActivate: [AuthGuard] },
+    {
+        path: 'register',
+        component: RegisterComponent,
+        canActivate: [ConfigurationGuard],
+    },
+    {
+        path: 'configuration',
+        component: ConfigurationComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'customer/edit/:id',
+        component: EditCustomerComponent,
+        canActivate: [AuthGuard],
+    },
     { path: '**', component: NotFoundComponent },
 ];
 

@@ -21,8 +21,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CustomerService } from './services/customer.service';
 import { LoginService } from './services/login.service';
-import { AuthGuard } from './guards/auth.guard';
 import { ConfigurationService } from './services/configuration.service';
+import { AuthGuard } from './guards/auth.guard';
+import { ConfigurationGuard } from './guards/configuration.guard';
 
 @NgModule({
     declarations: [
@@ -49,6 +50,7 @@ import { ConfigurationService } from './services/configuration.service';
     providers: [
         AuthGuard,
         ConfigurationService,
+        ConfigurationGuard,
         CustomerService,
         LoginService
     ],
