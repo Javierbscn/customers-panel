@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     }
 
     disableBtn(input: HTMLInputElement): void {
-        input.toggleAttribute('disabled')
+        input.toggleAttribute('disabled');
     }
 
     login(input: HTMLInputElement): void {
@@ -53,5 +53,13 @@ export class LoginComponent implements OnInit {
                     timeout: 5000,
                 });
             });
+    }
+
+    showPassword(event: Event, input: HTMLInputElement): void {
+        (event.target as HTMLElement).classList.toggle('fa-eye-slash');
+
+        input.getAttribute('type') === 'password'
+            ? input.setAttribute('type', 'text')
+            : input.setAttribute('type', 'password');
     }
 }

@@ -47,4 +47,22 @@ export class RegisterComponent implements OnInit {
             });
         }
     }
+
+    showPassword(
+        iconOne: HTMLElement,
+        iconTwo: HTMLElement,
+        input: HTMLInputElement,
+        confirmInput: HTMLInputElement
+    ): void {
+        iconOne.classList.toggle('fa-eye-slash');
+        iconTwo.classList.toggle('fa-eye-slash');
+
+        if (input.getAttribute('type') === 'password') {
+            input.setAttribute('type', 'text');
+            confirmInput.setAttribute('type', 'text');
+        } else {
+            input.setAttribute('type', 'password');
+            confirmInput.setAttribute('type', 'password');
+        }
+    }
 }
